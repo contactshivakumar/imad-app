@@ -5,10 +5,20 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var data = {
+var data = [
+    {
     "title":"article one",
-    "message":"this is article one"
-}
+    "message":"this is article one Sindhu Darling"
+    },
+    {
+    "title":"article Two",
+    "message":"this is article Two Sindhu Darling"
+    },
+    {
+    "title":"article Three",
+    "message":"this is article Three Sindhu Darling"
+    }
+];
 
 function getHtmlMessage(data) {
 
@@ -43,15 +53,15 @@ app.get('/ui/madi.png', function (req, res) {
 });
 
 app.get('/article-one', function(req,res) {
-   res.send(getHtmlMessage(data)) ;
+   res.send(getHtmlMessage(data[0])) ;
 });
 
 app.get('/article-two', function(req,res) {
-   res.sendFile(path.join(__dirname,'ui','article-two.html')) ;
+    res.send(getHtmlMessage(data[1])) ;
 });
 
 app.get('/article-three', function(req,res) {
-   res.sendFile(path.join(__dirname,'ui','article-three.html')) ;
+    res.send(getHtmlMessage(data[2])) ;
 });
 
 // Do not change port, otherwise your app won't run on IMAD servers
