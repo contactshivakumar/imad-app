@@ -5,6 +5,31 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var data = {
+    "title":"article one",
+    "message":"this is article one"
+}
+
+function getHtmlMessage(data) {
+
+var title=data.title;
+var message=data.message;
+
+var htmlMessage=`
+    <html>
+    <title>
+        ${title}
+    </title>
+    <body>
+        <div>
+            <h1>${message}</h1>
+        </div>
+    </body>
+</html>`
+;
+return htmlMessage;
+}
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -18,7 +43,7 @@ app.get('/ui/madi.png', function (req, res) {
 });
 
 app.get('/article-one', function(req,res) {
-   res.sendFile(path.join(__dirname,'ui','article-one.html')) ;
+   res.send(getHtmlMessage(data)) ;
 });
 
 app.get('/article-two', function(req,res) {
