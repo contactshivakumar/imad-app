@@ -1,11 +1,22 @@
 console.log('Loaded!');
 var button = document.getElementById('counter');
-var counter=0;
-alert(button);
+
 
 button.onclick=function() {
-counter=counter+1;
-alert(counter.toString());
-var span=document.getElementById('count');
-span.innerHTML=counter.toString();
+    var request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function () {
+        if(request.readyState === XMLHttpRequest.DONE) {
+            if(request.status === 200) {
+               var counter=request.responseText;
+               var span=document.getElementById('count');
+               span.innerHTML=counter.toString();
+            }
+            
+        }
+        
+    };
+    
+request.open("GET","http://contactshivakumar.imad.hasura-app.io/counter");
+request.send(null);
 };
