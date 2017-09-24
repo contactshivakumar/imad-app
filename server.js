@@ -64,6 +64,9 @@ app.get('/article-three', function(req,res) {
     res.send(getHtmlMessage(data[2])) ;
 });
 
+app.get('/ui/main.js', function(req,res) {
+    res.sendFile(path.join(__dirname,'ui','main.js'));
+}); 
 var counter=0
 
 app.get('/counter', function(req,res) {
